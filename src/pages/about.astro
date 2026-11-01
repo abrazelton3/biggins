@@ -1,4 +1,6 @@
 ---
+// Each page loads one stylesheet bundle (styles/bundles/) so the design's layer order holds
+import '../styles/bundles/home.css';
 import Base from '../layouts/Base.astro';
 import AboutSection from '../components/AboutSection.astro';
 import { fetchAbout } from '../lib/queries';

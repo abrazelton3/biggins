@@ -1,8 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import Emphasis from '../../components/Emphasis.astro';
-import '../../styles/essay.css';
-import '../../styles/theme-site.css';
+// Each page loads one stylesheet bundle (styles/bundles/) so the design's layer order holds
+import '../../styles/bundles/essay.css';
 import { imageUrl } from '../../lib/sanity';
 import { fetchEssays, fetchSite } from '../../lib/queries';
 import { renderBody } from '../../lib/portableText';

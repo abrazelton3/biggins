@@ -1,0 +1,6 @@
+/* Home + About: one sheet per page, in the Claude Design file's load order (theme last) */
+@import '../styles.css';
+@import '../site.css';
+@import '../stamps.css';
+@import '../notebook-fx.css';
+@import '../theme-card.css';

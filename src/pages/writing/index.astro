@@ -1,4 +1,6 @@
 ---
+// Each page loads one stylesheet bundle (styles/bundles/) so the design's layer order holds
+import '../../styles/bundles/writing.css';
 import PageLayout from '../../layouts/PageLayout.astro';
 import { fetchWriting } from '../../lib/queries';
 

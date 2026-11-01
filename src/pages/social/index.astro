@@ -1,7 +1,6 @@
 ---
-// page styles load before PageLayout so the notebook-card theme (in PageLayout) layers on top, as in the design
-import '../../styles/pages.css';
-import '../../styles/page-social.css';
+// Each page loads one stylesheet bundle (styles/bundles/) so the design's layer order holds
+import '../../styles/bundles/social.css';
 import PageLayout from '../../layouts/PageLayout.astro';
 import SocialGallery from '../../components/SocialGallery.astro';
 import { fetchSocial } from '../../lib/queries';

@@ -1,0 +1,5 @@
+/* Social page, in the design's load order */
+@import '../pages.css';
+@import '../page-social.css';
+@import '../theme-card.css';
+@import '../theme-site.css';
