@@ -1,0 +1,22 @@
+---
+import '../styles/stamps.css';
+// A passport-stamp link (stamps.css + scripts/stamps.js draw the SVG from the
+// data-* attributes). Stamps are part of the design, so they live in code;
+// position and tilt come in through `style` exactly as the Claude Design file set them.
+interface Props {
+  href: string;
+  tip: string;
+  shape: 'circle' | 'oval' | 'rect';
+  ink: 'blue' | 'red' | 'green' | 'violet';
+  ring?: string;
+  lines: string;
+  style: string;
+  class?: string;
+}
+const { href, tip, shape, ink, ring = '', lines, style, class: extra } = Astro.props;
+---
+<a class:list={['tstamp', extra]} href={href} style={style} data-shape={shape} data-ink={ink} data-ring={ring} data-lines={lines} data-tip={tip}></a>
+
+<script>
+  import '../scripts/stamps.js';
+</script>

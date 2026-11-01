@@ -1,0 +1,22 @@
+/* SITE-WIDE NOTEBOOK-CARD THEME for inner pages & essays. Loads after theme-card.css. */
+body,body.essay{background:var(--desk);background-image:none}
+body>.page,.essay-wrap{background-color:var(--sheet);box-shadow:0 22px 44px -28px rgba(25,45,65,.55),0 1px 0 rgba(25,45,65,.06)}
+body>.page{max-width:min(1200px,calc(100% - 64px));margin:40px auto 0;padding:4px 56px 64px 100px}
+body>.page::before,.essay-wrap::before{content:"";position:absolute;left:18px;top:0;bottom:0;width:24px;pointer-events:none;z-index:1;background:radial-gradient(circle,var(--desk) 0 8.5px,rgba(30,50,70,.22) 9px 10px,transparent 10.5px) 0 64px/24px 260px repeat-y}
+.essay-wrap{max-width:min(860px,calc(100% - 48px));margin:40px auto 0;padding:8px 56px 80px 116px;background-image:linear-gradient(to right,transparent 86px,rgba(161,113,68,.38) 86px,rgba(161,113,68,.38) 87px,transparent 87px),repeating-linear-gradient(var(--sheet),var(--sheet) 33px,var(--rule-blue) 33px,var(--rule-blue) 34px)}
+.page-head h1 em,.page .contact-hero h1 em,.essay-head h1 em,.blog-head h1 em,.client-head h2 em{font-family:"Caveat",cursive;font-style:normal;font-weight:600;font-size:1.12em;color:var(--blue);letter-spacing:0}
+.crumb{color:var(--muted)}
+footer{color:var(--ink);margin-top:48px}
+footer h3{color:var(--ink)}
+footer h3 em{font-family:"Caveat",cursive;font-style:normal;font-weight:600;font-size:1.18em;color:var(--blue)}
+footer .col-label{color:var(--ochre-deep)}
+footer a{color:var(--ink)}
+footer a:hover{border-bottom-color:var(--blue);color:var(--blue)}
+footer a.active{color:var(--blue-deep)}
+footer .colophon{border-top-color:var(--rule);color:var(--muted)}
+.contact-hero,.nb-head,.page-head{position:relative}
+.tstamp.ts-head{z-index:4}
+html{overflow-x:clip}
+.page .gallery-rail{left:auto;width:auto;transform:none;margin-left:-100px;margin-right:-56px}
+@media (max-width:860px){body>.page{padding:4px 28px 48px 64px;max-width:calc(100% - 32px)}.page .gallery-rail{margin-left:-64px;margin-right:-28px}.essay-wrap{padding:8px 24px 64px 64px;max-width:calc(100% - 24px);background-image:linear-gradient(to right,transparent 48px,rgba(161,113,68,.34) 48px,rgba(161,113,68,.34) 49px,transparent 49px),repeating-linear-gradient(var(--sheet),var(--sheet) 33px,var(--rule-blue) 33px,var(--rule-blue) 34px)}body>.page::before,.essay-wrap::before{left:8px;width:20px;background-size:20px 260px}.tstamp.ts-head{display:none}}
+@media (max-width:520px){body>.page{padding:4px 18px 40px 40px;max-width:calc(100% - 16px);margin-top:20px}.page .gallery-rail{margin-left:-40px;margin-right:-18px}.essay-wrap{padding:8px 16px 56px 40px;max-width:calc(100% - 12px);margin-top:20px;background-image:repeating-linear-gradient(var(--sheet),var(--sheet) 33px,var(--rule-blue) 33px,var(--rule-blue) 34px)}body>.page::before,.essay-wrap::before{left:4px;width:18px;background-size:18px 260px}}

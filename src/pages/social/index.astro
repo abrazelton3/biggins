@@ -1,7 +1,9 @@
 ---
+// page styles load before PageLayout so the notebook-card theme (in PageLayout) layers on top, as in the design
+import '../../styles/pages.css';
+import '../../styles/page-social.css';
 import PageLayout from '../../layouts/PageLayout.astro';
 import SocialGallery from '../../components/SocialGallery.astro';
-import '../../styles/page-social.css';
 import { fetchSocial } from '../../lib/queries';
 
 const galleries = await fetchSocial();

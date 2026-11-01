@@ -18,6 +18,12 @@ const sectionObject = (name: string, title: string) =>
       defineField({ name: 'sub', title: 'Subhead', type: 'string' }),
       defineField({ name: 'subtitle', type: 'string', description: 'Used by the creative header.' }),
       defineField({ name: 'intro', type: 'text', rows: 3 }),
+      defineField({
+        name: 'circle',
+        title: 'Circled word',
+        type: 'string',
+        description: 'Optional, Creative only. A word from the intro to circle in hand-drawn ochre — copy it exactly.',
+      }),
     ],
   });
 

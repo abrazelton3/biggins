@@ -1,14 +1,18 @@
 ---
 import { imageUrl } from '../lib/sanity';
 
-const { tile } = Astro.props;
+const { tile, href } = Astro.props;
 // image may be unset (placeholder). styles.css renders a bare <image-slot> as a
 // neutral 4:5 block, so emit that rather than a broken <img>.
 const src = imageUrl(tile.image, 1200);
 ---
 <figure class="soctile">
   {src ? (
-    <img src={src} alt={tile.label} loading="lazy" />
+    href ? (
+      <a href={href}><img src={src} alt={tile.label} loading="lazy" /></a>
+    ) : (
+      <img src={src} alt={tile.label} loading="lazy" />
+    )
   ) : (
     <image-slot role="img" aria-label={`${tile.label} — placeholder graphic`}></image-slot>
   )}

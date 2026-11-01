@@ -2,21 +2,36 @@
 import Base from '../layouts/Base.astro';
 import Emphasis from '../components/Emphasis.astro';
 import ClipCard from '../components/ClipCard.astro';
+import DocRow from '../components/DocRow.astro';
 import EssayCard from '../components/EssayCard.astro';
 import FieldFrame from '../components/FieldFrame.astro';
 import SocialTile from '../components/SocialTile.astro';
+import AboutSection from '../components/AboutSection.astro';
+import ContactFooter from '../components/ContactFooter.astro';
+import Stamp from '../components/Stamp.astro';
 import { imageUrl } from '../lib/sanity';
 import { fetchHome } from '../lib/queries';
 
-const { hero, sections, clips: clipHighlights, essays: essayHighlights, fieldFrames, socialWork } = await fetchHome();
+const {
+  site, hero, sections, clips: clipHighlights, papers, essays: essayHighlights,
+  fieldFrames, socialWork, about, contact,
+} = await fetchHome();
 
 const portrait = imageUrl(hero.portrait?.image, 1000);
+
+// Creative intro: circle one word in hand-drawn ochre (sections → creative → "circle").
+const intro: string = sections.creative.intro ?? '';
+const circle: string = sections.creative.circle ?? '';
+const ci = circle ? intro.indexOf(circle) : -1;
 ---
-<Base>
+<Base showFooter={false}>
   <main>
     <!-- HERO -->
     <section class="hero">
+      <Stamp class="ts-seam" href="/creative/te-amo-sempre-filha/" style="--rot:-12deg;top:34px;right:calc(46.5% - 96px)" shape="circle" ink="green" ring="REPÚBLICA FEDERATIVA DO BRASIL ★ ENTRADA ★ " lines="CURITIBA|2022|ROTARY" tip="read: Te amo sempre, filha" />
+      <Stamp href="#about" style="--rot:-8deg;bottom:-30px;right:-26px" shape="oval" ink="blue" ring="ROTARY YOUTH EXCHANGE ✦ INTERCÂMBIO ✦ " lines="BRASIL|22 · 23" tip="more about me" />
       <div>
+        <div class="hand-name">{site.name}</div>
         <div class="eyebrow">{hero.eyebrow}</div>
         <h1><Emphasis text={hero.headline} emphasis={hero.emphasis} /></h1>
         <p class="lede">{hero.lede}</p>
@@ -29,7 +44,7 @@ const portrait = imageUrl(hero.portrait?.image, 1000);
       </div>
     </section>
 
-    <!-- WRITING — highlights -->
+    <!-- WRITING — highlights + research -->
     <section id="writing">
       <div class="section-head">
         <div class="num">{sections.writing.num}</div>
@@ -38,7 +53,18 @@ const portrait = imageUrl(hero.portrait?.image, 1000);
       <div class="clips">
         {clipHighlights.map((clip) => <ClipCard clip={clip} />)}
       </div>
-      <p class="more">More in writing → <a href="/writing/">selected writing &amp; research</a></p>
+
+      {papers.length > 0 && (
+        <Fragment>
+          <div class="subhead">
+            <div class="num">{sections.research.num}</div>
+            <h3><Emphasis text={sections.research.title} emphasis={sections.research.emphasis} /></h3>
+          </div>
+          <div class="aclist">
+            {papers.map((doc) => <DocRow doc={doc} />)}
+          </div>
+        </Fragment>
+      )}
     </section>
 
   <!-- FROM THE FIELD — tideline (full-bleed) -->
@@ -64,12 +90,17 @@ const portrait = imageUrl(hero.portrait?.image, 1000);
   <section id="creative" class="creative fullbleed">
     <div class="inner">
       <div class="kicker">{sections.creative.num}</div>
-      <h2><a href="/creative/">{sections.creative.title}</a><span class="serifit">{sections.creative.subtitle}</span></h2>
-      <p class="intro">{sections.creative.intro}</p>
+      <h2>{sections.creative.title}<span class="serifit">{sections.creative.subtitle}</span></h2>
+      <p class="intro">
+        {ci >= 0 ? (
+          <Fragment>{intro.slice(0, ci)}<span class="nb-circle">{circle}</span>{intro.slice(ci + circle.length)}</Fragment>
+        ) : intro}
+      </p>
       <div class="snaps">
         {essayHighlights.map((essay) => <EssayCard essay={essay} />)}
+        <span class="nb-margin" aria-hidden="true">turn a photo over for its first line →</span>
       </div>
-      <p class="more">More in the journal → <a href="/creative/">open the notebook</a></p>
+      <p class="more">Read the full notebook → <a href="/creative/">all essays</a></p>
     </div>
   </section>
 
@@ -83,8 +114,21 @@ const portrait = imageUrl(hero.portrait?.image, 1000);
         </div>
       </div>
       <div class="socgrid">
-        {socialWork.map((tile) => <SocialTile tile={tile} />)}
+        {socialWork.map((tile) => <SocialTile tile={tile} href="/social/" />)}
       </div>
+      <p class="soc-more"><a href="/social/">See all social work: videos, reels &amp; carousels →</a></p>
     </section>
+
+    <!-- ABOUT -->
+    <AboutSection about={about} num={sections.about.num} />
   </main>
+
+  <!-- FOOTER / CONTACT -->
+  <ContactFooter site={site} contact={contact} withHeadshot>
+    <Stamp href="/creative/" style="--rot:-6deg;top:-40px;right:max(170px,calc(50% - 470px))" shape="oval" ink="red" ring="BRASIL ✦ SAÍDA ✦ RETORNO AOS EUA ✦ " lines="SAÍDA|2023" tip="all essays" />
+  </ContactFooter>
 </Base>
+
+<script>
+  import '../scripts/tidewave.js';
+</script>

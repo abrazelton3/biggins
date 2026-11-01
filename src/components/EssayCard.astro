@@ -1,11 +1,21 @@
 ---
+import '../styles/notebook-fx.css';
 import { imageUrl } from '../lib/sanity';
 
 const { essay } = Astro.props;
 const img = imageUrl(essay.image, 900);
 const href = `/creative/${essay.slug}/`;
+
+// First sentence of the body, for the back of the polaroid (notebook-fx.js).
+// Empty body → no data attribute → the card stays one-sided.
+const text = (essay.text ?? '').replace(/\s+/g, ' ').trim();
+const sentence = text.match(/^.+?[.!?…][”"’)]?(?=\s|$)/)?.[0] ?? text;
+const firstLine = sentence.length > 220 ? sentence.slice(0, 217).replace(/\s+\S*$/, '') + '…' : sentence;
 ---
-<a class="snap" href={href}>
+<a class="snap" href={href} data-first-line={firstLine || undefined}>
+  {essay.startHere && (
+    <span class="nb-start" aria-hidden="true">start here<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 4c14 2 24 12 26 28"/><path d="M23 26l7 7 5-9"/></svg></span>
+  )}
   <div class="img" style={img ? `background-image:url('${img}')` : undefined}></div>
   <div class="snap-body">
     <div class="meta"><span class="cat">{essay.category}</span><span>{essay.period}</span></div>
@@ -14,3 +24,7 @@ const href = `/creative/${essay.slug}/`;
     <span class="readlink">Read →</span>
   </div>
 </a>
+
+<script>
+  import '../scripts/notebook-fx.js';
+</script>

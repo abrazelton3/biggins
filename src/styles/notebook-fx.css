@@ -1,0 +1,29 @@
+.snaps{position:relative;grid-template-columns:repeat(3,minmax(0,1fr))}
+@media (max-width:1080px){.snaps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){.snaps{grid-template-columns:minmax(0,1fr)}}
+.snaps .snap .cap{overflow-wrap:break-word;hyphens:auto}
+.snaps .snap{position:relative;transform:rotate(var(--tilt,0deg));transition:transform .3s ease,box-shadow .3s ease}
+.snaps .snap:nth-child(3n+1){--tilt:-1.2deg}.snaps .snap:nth-child(3n+2){--tilt:.9deg}.snaps .snap:nth-child(3n+3){--tilt:-.5deg}
+.snaps .snap:hover{transform:rotate(0deg) translateY(-5px)}
+.snaps .snap::before{content:"";position:absolute;z-index:4;top:-11px;left:50%;width:74px;height:22px;transform:translateX(-50%) rotate(-3deg);background:rgba(236,224,196,.78);box-shadow:0 1px 2px rgba(20,40,58,.12);pointer-events:none}
+.flip{position:relative;aspect-ratio:4/3;perspective:1000px;container-type:inline-size}
+.flip-inner{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.3,.7,.2,1)}
+.flip.on .flip-inner{transform:rotateY(180deg)}
+.flip .img,.flip .back{position:absolute;inset:0;aspect-ratio:auto;-webkit-backface-visibility:hidden;backface-visibility:hidden}
+.snaps .snap .img{transition:filter .7s ease}
+.snaps .snap:hover .img{filter:grayscale(0) contrast(1) saturate(.92)}
+.flip .back{transform:rotateY(180deg);background:#f5f0e5 repeating-linear-gradient(transparent 0 27px,rgba(61,90,128,.12) 27px 28px);border:1px solid var(--rule);padding:clamp(10px,5cqw,18px) clamp(12px,6cqw,20px);display:flex;flex-direction:column;gap:6px;overflow:hidden}
+.back .bh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.back .bl{font:500 9.5px/1 "IBM Plex Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--ochre-deep)}
+.back q{font:500 clamp(16px,7.2cqw,23px)/1.15 "Caveat",cursive;color:var(--blue-deep);quotes:"“" "”";text-wrap:pretty;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.back .bd{font:500 clamp(14px,5.5cqw,18px)/1 "Caveat",cursive;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.turn{position:absolute;z-index:3;right:0;bottom:0;padding:16px 10px 6px 18px;font:600 17px/1 "Caveat",cursive;color:var(--blue-deep);background:linear-gradient(135deg,transparent 50%,#f3ecdc 50%);cursor:pointer;opacity:.95;transition:padding .2s}
+.turn:hover{padding:20px 12px 8px 24px}
+.flip.on .turn{background:linear-gradient(135deg,transparent 50%,#e9e0cc 50%)}
+.nb-circle{position:relative;white-space:nowrap}
+.nb-circle::after{content:"";position:absolute;inset:-8px -12px -6px -10px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 60' preserveAspectRatio='none'%3E%3Cpath d='M18 34C14 14 70 5 118 7s78 12 74 28-58 22-104 20S6 48 14 30c4-8 18-14 34-17' fill='none' stroke='%23b07433' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") center/100% 100% no-repeat;pointer-events:none}
+.nb-start{position:absolute;z-index:5;top:-46px;right:-14px;font:600 24px/1 "Caveat",cursive;color:var(--ochre-deep);transform:rotate(6deg);pointer-events:none;display:flex;align-items:flex-start;gap:2px}
+.nb-start svg{width:40px;height:40px;margin-top:10px;transform:scaleX(-1)}
+.nb-margin{position:absolute;left:-122px;top:30px;width:100px;font:600 19px/1.15 "Caveat",cursive;color:var(--blue);transform:rotate(-4deg);text-align:right}
+@media (max-width:1080px){.nb-margin{display:none}}
+@media (prefers-reduced-motion:reduce){.flip-inner,.snaps .snap,.snaps .snap .img{transition:none}}

@@ -1,6 +1,8 @@
 ---
 import '../styles/pages.css';
-import Emphasis from '../components/Emphasis.astro';
+import '../styles/theme-card.css';
+import '../styles/theme-site.css';
+import ContactFooter from '../components/ContactFooter.astro';
 import { fetchFooter } from '../lib/queries';
 
 interface Props {
@@ -50,39 +52,7 @@ const isActive = (href: string) => {
   <slot />
 </div>
 
-<footer>
-  <div class="wrap">
-    <div>
-      <h3><Emphasis text={contact.heading} emphasis={contact.emphasis} /></h3>
-      <p class="pitch">{contact.pitch}</p>
-    </div>
-    <div>
-      <div class="col-label">Email</div>
-      <ul><li><a href={`mailto:${contact.email}`}>{contact.email}</a></li></ul>
-      <div class="col-label" style="margin-top:24px">Press kit</div>
-      <ul><li><a href={contact.pressKit?.url} download>{contact.pressKit?.label}</a></li></ul>
-    </div>
-    <div>
-      <div class="col-label">Elsewhere</div>
-      <ul>
-        {(contact.elsewhere ?? []).map((l: any) => (
-          <li><a href={l.url} target="_blank" rel="noopener">{l.label}</a></li>
-        ))}
-      </ul>
-    </div>
-    <div>
-      <div class="col-label">On file</div>
-      <ul>
-        {(contact.onFile ?? []).map((l: any) => (
-          <li><a href={l.url} class:list={{ active: isActive(l.url) }}>{l.label}</a></li>
-        ))}
-      </ul>
-    </div>
-    <div class="colophon">
-      {(site.colophon ?? []).map((line: string) => <span>{line}</span>)}
-    </div>
-  </div>
-</footer>
+<ContactFooter site={site} contact={contact} isActive={isActive} />
 
 </body>
 </html>

@@ -148,10 +148,10 @@
   display: block;
   text-decoration: none;
   color: inherit;
-  background-color: #fbfaf4;
+  background-color: #f5f0e5;
   background-image:
-    linear-gradient(to right, transparent 30px, rgba(176,116,51,0.34) 30px, rgba(176,116,51,0.34) 31px, transparent 31px),
-    repeating-linear-gradient(#fbfaf4, #fbfaf4 31px, rgba(31,58,82,0.06) 31px, rgba(31,58,82,0.06) 32px);
+    linear-gradient(to right, transparent 30px, rgba(161,113,68,0.34) 30px, rgba(161,113,68,0.34) 31px, transparent 31px),
+    repeating-linear-gradient(#f5f0e5, #f5f0e5 31px, rgba(61,90,128,0.06) 31px, rgba(61,90,128,0.06) 32px);
   border: 1px solid rgba(22,32,42,0.12);
   box-shadow: 0 10px 24px -18px rgba(20,40,58,0.42);
   padding: 22px 24px 22px 46px;
@@ -165,8 +165,8 @@
   position: absolute;
   top: -9px; left: 30px;
   width: 66px; height: 18px;
-  background: rgba(176,116,51,0.15);
-  border: 1px solid rgba(176,116,51,0.22);
+  background: rgba(161,113,68,0.15);
+  border: 1px solid rgba(161,113,68,0.22);
   transform: rotate(-3deg);
 }
 .leaf:hover {

@@ -1,0 +1,233 @@
+/* ===================================================================
+   Essay reading page — "the notebook" interior.
+   Shared across every /creative/:id page. Pairs with styles.css
+   (tokens, fonts, nav). In the SSG this is the essay template's CSS.
+   =================================================================== */
+
+/* lined-paper notebook wash, like the notebook index */
+body.essay {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(to right, transparent 78px, rgba(161,113,68,0.32) 78px, rgba(161,113,68,0.32) 79px, transparent 79px),
+    repeating-linear-gradient(var(--paper), var(--paper) 33px, rgba(61,90,128,0.10) 33px, rgba(61,90,128,0.10) 34px);
+}
+
+.essay-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0 32px 120px;
+}
+
+/* breadcrumb back to the notebook */
+.essay-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 40px 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ochre-deep);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color .2s;
+}
+.essay-back:hover { border-bottom-color: var(--ochre); }
+
+/* template marker — delete in production */
+.tpl-note {
+  margin: 28px 0 0;
+  padding: 10px 16px;
+  border-left: 3px solid var(--ochre);
+  background: color-mix(in oklab, var(--ochre) 8%, var(--paper));
+  font-family: "Newsreader", serif;
+  font-style: italic;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+/* header */
+.essay-head { margin: 40px 0 0; }
+.essay-head .cat {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ochre-deep);
+}
+.essay-head h1 {
+  font-family: "Newsreader", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 60px);
+  line-height: 1.04;
+  letter-spacing: -0.02em;
+  margin: 14px 0 0;
+  text-wrap: balance;
+}
+.essay-head .dek {
+  font-family: "Newsreader", serif;
+  font-style: italic;
+  font-size: 21px;
+  line-height: 1.4;
+  color: var(--muted);
+  margin: 14px 0 0;
+}
+.essay-head .byline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 6px 16px;
+  margin: 22px 0 0;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12.5px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.essay-head .byline .name { color: var(--ink); }
+.essay-head .byline .dot { color: var(--ochre); }
+
+/* hero image */
+.essay-hero {
+  margin: 36px 0 0;
+}
+.essay-hero img {
+  width: 100%;
+  display: block;
+  border: 1px solid var(--rule);
+}
+.essay-hero figcaption {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+/* body type — generous, serif, readable measure */
+.essay-body {
+  margin: 40px 0 0;
+  font-family: "Newsreader", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.65;
+  color: var(--ink);
+}
+.essay-body p { margin: 0 0 1.3em; text-wrap: pretty; }
+
+/* drop cap on the opening paragraph (explicit span — reliable) */
+.essay-body .dropcap {
+  font-family: "Newsreader", serif;
+  font-weight: 500;
+  float: left;
+  font-size: 4.4em;
+  line-height: 0.74;
+  padding: 6px 12px 0 0;
+  color: var(--ochre-deep);
+}
+
+.essay-body h2 {
+  font-family: "Newsreader", serif;
+  font-weight: 500;
+  font-size: 27px;
+  letter-spacing: -0.01em;
+  margin: 1.8em 0 0.5em;
+}
+
+/* pull quote */
+.essay-body blockquote {
+  margin: 1.6em 0;
+  padding: 6px 0 6px 28px;
+  border-left: 3px solid var(--ochre);
+  font-size: 25px;
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--blue-deep);
+}
+
+/* inline figure */
+.essay-fig { margin: 2em 0; }
+.essay-fig img { width: 100%; display: block; border: 1px solid var(--rule); }
+.essay-fig figcaption {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 10px;
+}
+
+/* section divider */
+.essay-rule {
+  border: 0;
+  text-align: center;
+  margin: 2.4em 0;
+}
+.essay-rule::before {
+  content: "❧";
+  color: var(--ochre);
+  font-size: 22px;
+}
+
+/* end mark + signature */
+.essay-end {
+  margin-top: 2.4em;
+  padding-top: 1.6em;
+  border-top: 1px solid var(--rule);
+}
+.essay-end .sig {
+  font-family: "Caveat", cursive;
+  font-size: 34px;
+  color: var(--blue);
+  line-height: 1;
+}
+.essay-end .meta {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 8px;
+}
+
+/* next / prev */
+.essay-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 56px;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.essay-nav a {
+  font-family: "Newsreader", serif;
+  font-size: 18px;
+  color: var(--ink);
+  text-decoration: none;
+  max-width: 46%;
+}
+.essay-nav a .lbl {
+  display: block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ochre-deep);
+  margin-bottom: 4px;
+}
+.essay-nav a.next { text-align: right; margin-left: auto; }
+.essay-nav a:hover .ttl { border-bottom: 1px solid var(--ochre); }
+
+@media (max-width: 560px) {
+  .essay-wrap { padding: 0 20px 80px; }
+  body.essay {
+    background-image:
+      linear-gradient(to right, transparent 40px, rgba(161,113,68,0.3) 40px, rgba(161,113,68,0.3) 41px, transparent 41px),
+      repeating-linear-gradient(var(--paper), var(--paper) 33px, rgba(61,90,128,0.10) 33px, rgba(61,90,128,0.10) 34px);
+  }
+  .essay-body { font-size: 18px; }
+  .essay-body blockquote { font-size: 21px; }
+}

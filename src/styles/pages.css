@@ -4,16 +4,18 @@
    ───────────────────────────────────────────────────────────── */
 
 :root {
-  --bg: #f6f1e6;
-  --paper: #fbf7ee;
-  --paper-deep: #efe6d4;
+  --bg: #f2ede6;
+  --paper: #f5f0e5;
+  --paper-deep: #e8e0d2;
   --ink: #16202a;
   --muted: #5f6b73;
   --rule: rgba(22, 32, 42, 0.15);
-  --blue: #1f3a52;
-  --blue-deep: #14283a;
-  --ochre: #b07433;
-  --ochre-deep: #8a5320;
+  --blue: #3d5a80;
+  --blue-deep: #2b4262;
+  --ochre: #a17144;
+  --ochre-deep: #7f5530;
+    /* tertiary — soft sky, for tinted grounds */
+    --sky: #c3d7e7;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; padding: 0; }
@@ -416,7 +418,7 @@ footer h3 {
   font-size: 38px;
   line-height: 1.05;
   margin: 0 0 14px;
-  color: #fbf7ee;
+  color: #f5f0e5;
 }
 footer h3 em { font-style: italic; color: var(--ochre); }
 footer .pitch {

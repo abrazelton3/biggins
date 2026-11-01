@@ -21,6 +21,22 @@ export const about = defineType({
       description: 'One entry per paragraph.',
     }),
     defineField({
+      name: 'rightNow',
+      title: 'Right now (post-it)',
+      type: 'object',
+      description: 'Optional. A yellow post-it under your photo. Leave the note empty to hide it.',
+      fields: [
+        defineField({ name: 'heading', type: 'string', initialValue: 'Right now' }),
+        defineField({
+          name: 'body',
+          title: 'Note',
+          type: 'array',
+          description: 'Keep it short: a sentence or two. Bold and links work.',
+          of: [{ type: 'block', styles: [{ title: 'Normal', value: 'normal' }], lists: [] }],
+        }),
+      ],
+    }),
+    defineField({
       name: 'sidebar',
       type: 'array',
       of: [

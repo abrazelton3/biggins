@@ -1,0 +1,34 @@
+---
+// The About block — on the home page (#about) and on /about/. Text, photo and
+// facts come from the About singleton; the "Right now" post-it shows only when
+// that field has something in it.
+import { imageUrl } from '../lib/sanity';
+import { renderBody } from '../lib/portableText';
+
+const { about, num } = Astro.props;
+const fieldPhoto = imageUrl(about.fieldPhoto?.image, 1000);
+const rightNow = renderBody(about.rightNow?.body);
+---
+<section id="about" class="about">
+  <div class="about-rail">
+    <div class="num">{num}</div>
+    <figure class="field-photo">
+      <div class="img" style={fieldPhoto ? `background-image:url('${fieldPhoto}')` : undefined}></div>
+      <figcaption>{about.fieldPhoto?.caption} · <span class="where">{about.fieldPhoto?.location}</span></figcaption>
+    </figure>
+    {rightNow && (
+      <aside class="postit" aria-label="What I'm doing now">
+        <div class="pi-k">{about.rightNow.heading || 'Right now'}</div>
+        <Fragment set:html={rightNow} />
+      </aside>
+    )}
+  </div>
+  <div>
+    {(about.paragraphs ?? []).map((p: string) => <p>{p}</p>)}
+  </div>
+  <dl class="sidebar">
+    {(about.sidebar ?? []).map((row: any) => (
+      <div class="fact"><dt>{row.label}</dt><dd>{row.value}</dd></div>
+    ))}
+  </dl>
+</section>

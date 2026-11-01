@@ -1,6 +1,7 @@
 ---
 import '../styles/styles.css';
 import '../styles/site.css';
+import '../styles/theme-card.css';
 import { fetchSite } from '../lib/queries';
 
 const site = await fetchSite();
@@ -11,11 +12,14 @@ interface Props {
   /** Contact page renders its own rich footer (which carries the colophon),
    *  so it suppresses the global slim colophon footer. */
   showFooter?: boolean;
+  /** Essay pages: the notebook-sheet reading layout (essay.css, theme-site.css). */
+  bodyClass?: string;
 }
 const {
   title = `${site.name} — Environmental journalist`,
   description = site.role,
   showFooter = true,
+  bodyClass,
 } = Astro.props;
 
 const pathname = Astro.url.pathname;
@@ -41,7 +45,7 @@ const isActive = (href: string) => {
     rel="stylesheet"
   />
 </head>
-<body>
+<body class={bodyClass}>
 
 <nav class="top">
   <div class="wrap">

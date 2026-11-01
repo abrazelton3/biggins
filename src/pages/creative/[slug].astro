@@ -1,7 +1,10 @@
 ---
 import Base from '../../layouts/Base.astro';
+import Emphasis from '../../components/Emphasis.astro';
+import '../../styles/essay.css';
+import '../../styles/theme-site.css';
 import { imageUrl } from '../../lib/sanity';
-import { fetchEssays } from '../../lib/queries';
+import { fetchEssays, fetchSite } from '../../lib/queries';
 import { renderBody } from '../../lib/portableText';
 
 export async function getStaticPaths() {
@@ -10,30 +13,53 @@ export async function getStaticPaths() {
 }
 
 const { essay } = Astro.props;
-const img = imageUrl(essay.image, 1200);
-const bodyHtml = renderBody(essay.body);
+const site = await fetchSite();
+const img = imageUrl(essay.image, 1400);
+// Drop cap on the opening letter, as an explicit span (essay.css)
+const bodyHtml = renderBody(essay.body).replace(/^<p>([A-Za-zÀ-ÿ])/, '<p><span class="dropcap">$1</span>');
+const minutes = essay.words ? Math.max(1, Math.round(essay.words / 230)) : 0;
+const firstName = (site.name ?? '').split(' ')[0];
 ---
-<Base title={`${essay.title} — Amelie Brazelton`} description={essay.excerpt}>
-  <main>
-  <section class="creative fullbleed">
-    <div class="inner" style="max-width:760px">
-      <p class="more"><a href="/creative/">← Back to the notebook</a></p>
-      <div class="kicker">{essay.category} · {essay.period}</div>
-      <h2>{essay.title}</h2>
-      {img && (
-        <figure style="margin:28px 0">
-          <img src={img} alt={essay.title} loading="lazy" style="width:100%;height:auto;border:1px solid var(--rule)" />
-        </figure>
-      )}
-      {bodyHtml ? (
-        <div class="essay-body" set:html={bodyHtml} />
-      ) : (
-        <>
-          <p class="intro">{essay.excerpt}</p>
-          <p class="intro" style="color:var(--muted)"><em>The full essay is on its way — check back soon.</em></p>
-        </>
-      )}
-    </div>
-  </section>
-  </main>
+<Base title={`${essay.title} — ${site.name}`} description={essay.excerpt} bodyClass="essay" showFooter={false}>
+  <article class="essay-wrap">
+    <a class="essay-back" href="/creative/">← The notebook</a>
+
+    <header class="essay-head">
+      <div class="cat">{essay.category}</div>
+      <h1><Emphasis text={essay.title} emphasis={essay.emphasis} /></h1>
+      {essay.excerpt && <p class="dek">{essay.excerpt}</p>}
+      <div class="byline">
+        <span class="name">{site.name}</span>
+        {essay.period && <Fragment><span class="dot">·</span><span>{essay.period}</span></Fragment>}
+        {minutes > 0 && <Fragment><span class="dot">·</span><span>{minutes} min read</span></Fragment>}
+      </div>
+    </header>
+
+    {img && (
+      <figure class="essay-hero">
+        <img src={img} alt={essay.title} />
+      </figure>
+    )}
+
+    {bodyHtml ? (
+      <div class="essay-body">
+        <Fragment set:html={bodyHtml} />
+        <div class="essay-end">
+          <div class="sig">{firstName}</div>
+          {essay.period && <div class="meta">{essay.period}</div>}
+        </div>
+      </div>
+    ) : (
+      <div class="essay-body">
+        <p><em>The full essay is on its way — check back soon.</em></p>
+      </div>
+    )}
+
+    <nav class="essay-nav">
+      <a class="prev" href="/creative/">
+        <span class="lbl">Return</span>
+        <span class="ttl">The notebook</span>
+      </a>
+    </nav>
+  </article>
 </Base>

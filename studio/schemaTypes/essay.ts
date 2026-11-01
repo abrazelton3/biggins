@@ -38,6 +38,13 @@ export const essay = defineType({
       initialValue: false,
     }),
     defineField({
+      name: 'startHere',
+      title: '"Start here" note',
+      type: 'boolean',
+      description: 'Pins a handwritten "start here" arrow to this essay\'s photo. Use on one essay at a time.',
+      initialValue: false,
+    }),
+    defineField({
       name: 'body',
       title: 'Essay body',
       type: 'array',

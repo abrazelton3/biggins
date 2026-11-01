@@ -1,0 +1,19 @@
+.hero{position:relative}
+.tstamp{position:absolute;z-index:3;display:block;text-decoration:none;color:var(--st,#2d4f8f);transform:rotate(var(--rot,-6deg));transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.tstamp svg{display:block;width:100%;height:auto;overflow:visible;mix-blend-mode:multiply;opacity:.8;filter:url(#ts-ink)}
+.tstamp svg text{font-family:"IBM Plex Mono",monospace;fill:currentColor}
+.tstamp svg .hand{font-family:"Caveat",cursive;fill:#26407a}
+.tstamp[data-shape="circle"]{width:122px}.tstamp[data-shape="oval"]{width:168px}.tstamp[data-shape="rect"]{width:176px}
+.tstamp[data-ink="blue"]{--st:#2d4f8f}.tstamp[data-ink="red"]{--st:#b0383a}.tstamp[data-ink="green"]{--st:#2b7352}.tstamp[data-ink="violet"]{--st:#5a4b8f}
+.tstamp:hover,.tstamp:focus-visible{transform:rotate(calc(var(--rot,-6deg) * .4)) scale(1.06);outline:none}
+.tstamp:hover svg{opacity:.95}
+.ts-tip{position:absolute;left:50%;top:calc(100% + 8px);transform:translate(-50%,-4px) rotate(calc(var(--rot,-6deg) * -1));font:600 21px/1.1 "Caveat",cursive;color:var(--blue-deep);white-space:nowrap;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;background:color-mix(in oklab,var(--bg) 85%,transparent);padding:0 6px}
+.tstamp:hover .ts-tip,.tstamp:focus-visible .ts-tip{opacity:1;transform:translate(-50%,0) rotate(calc(var(--rot,-6deg) * -1))}
+@media (max-width:1080px){.tstamp{scale:.82}.tstamp.ts-seam[data-shape="rect"]{right:calc(45% - 150px)!important}}
+@media (max-width:860px){.tstamp.ts-seam{display:none}}
+@media (max-width:760px){.tstamp{scale:.66}}
+@media (prefers-reduced-motion:reduce){.tstamp,.ts-tip{transition:none}}
+.tide-wave{display:block;width:100%;height:44px;margin:-8px 0 14px}
+.tide-wave path{fill:none;stroke-linecap:round}
+.tide-wave .w1{stroke:var(--blue);stroke-width:1.6;opacity:.7}
+.tide-wave .w2{stroke:var(--ochre);stroke-width:1.2;opacity:.55}
